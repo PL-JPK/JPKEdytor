@@ -14,4 +14,4 @@ Wersję instalacyją dla systemów Windows (XP, Vista, 7, 8, 8.1, 10) można pob
 ## Zastrzeżenia
 Program jest udostępniony całkowicie za darmo. W związku z tym gwarancja na program jest ograniczona w maksymalnym zakresie dopuszczalnym przez polskie prawo. Program powstał i najparawdopodobniej będzie nadal tworzony jako dodatkowe moje zajęcie - proszę zatem nie oczekiwać, że wszystkie problemy będą rozwiązywane natychmiast i zawsze bezpłatnie.
 
-Każdy z Państwa jest zaproszony do tworzenia tego programu, instrukcji czy choćby zgłaszania błędów. We wszystkich takich sprawach proszę o korzystanie z platformy GitHub (tej właśnie, którą teraz Państwo czytacie). W sprawach niezwiązanych z programem jako całością, proszę o kontakt prywatnego e-maila na adres *jpk.edytor@gmail.com*.
+Każdy z Państwa jest zaproszony do tworzenia tego programu, instrukcji czy choćby zgłaszania błędów. We wszystkich takich sprawach proszę o korzystanie z platformy GitHub (tej właśnie, którą teraz Państwo czytacie). W sprawach niezwiązanych z programem jako całością, proszę o kontakt za pomocą prywatnego e-maila na adres *jpk.edytor@gmail.com*.
