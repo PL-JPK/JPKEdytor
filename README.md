@@ -6,6 +6,11 @@ Jest to prosty, najprawdopodobniej pierwszy program umożliwiający tworzenie pl
 - tworzenie, otwieranie i **zapis** plików JPK,
 - wklejanie danych z MS Excel
 
+## Korzystanie z programu
+Do programu nie powstała jeszcze instrukcja obsługi.
+
+Wersję instalacyją dla systemów Windows (XP, Vista, 7, 8, 8.1, 10) można pobrać [tutaj](https://github.com/PL-JPK/JPKEdytor/releases/latest).
+
 ## Zastrzeżenia
 Program jest udostępniony całkowicie za darmo. W związku z tym gwarancja na program jest ograniczona w maksymalnym zakresie dopuszczalnym przez polskie prawo. Program powstał i najparawdopodobniej będzie nadal tworzony jako dodatkowe moje zajęcie - proszę zatem nie oczekiwać, że wszystkie problemy będą rozwiązywane natychmiast i zawsze bezpłatnie.
 
