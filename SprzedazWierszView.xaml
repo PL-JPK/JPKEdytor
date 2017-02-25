@@ -1,0 +1,221 @@
+﻿<UserControl x:Class="Puch.JPK.SprzedazWierszView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Puch.JPK"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        d:DataContext="{x:Type local:JPKSprzedazWiersz}"
+        Height="390" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="FontStyle" Value="Italic"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel Margin="2">
+            <StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Width" Value="120"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+                <Style TargetType="xctk:DateTimePicker" BasedOn="{StaticResource dateEdit}"/>
+                <Style TargetType="CheckBox" BasedOn="{StaticResource rightCheckBox}"/>
+            </StackPanel.Resources>
+            <TextBlock Text="Nagłówek"/>
+            <Separator/>
+            <DockPanel>
+                <Label Content="Lp"/>
+                <TextBox Text="{Binding LpSprzedazy}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Data wystawienia"/>
+                <xctk:DateTimePicker Value="{Binding DataWystawienia}" />
+            </DockPanel>
+            <DockPanel>
+                <CheckBox Content="Data sprzedaży" IsChecked="{Binding DataSprzedazySpecified}" />
+                <xctk:DateTimePicker Value="{Binding DataSprzedazy}" IsEnabled="{Binding DataSprzedazySpecified}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Dowód sprzedaży"/>
+                <TextBox Text="{Binding DowodSprzedazy}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="NIP nabywcy"/>
+                <TextBox Text="{Binding NrKontrahenta}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Nazwa kontrahenta"/>
+                <TextBox Text="{Binding NazwaKontrahenta}" MaxLength="256"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Adres kontrahenta"/>
+                <TextBox Text="{Binding AdresKontrahenta}" MaxLength="256"/>
+            </DockPanel>
+            <Button Content="Pobierz NIP, nazwę i adres z danych własnych" Margin="3" Command="{Binding CommandWstawDaneWlasne}"/>
+        </StackPanel>
+        <GridSplitter HorizontalAlignment="Right" Width="3" Background="Gray" />
+        <StackPanel Grid.Column="1" Margin="2">
+            <TextBlock Text="Kwoty sprzedaży"/>
+            <Separator/>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}" >
+                        <Setter Property="Width" Value="260"/>
+                        <Setter Property="Padding" Value="2"/>
+                    </Style>
+                    <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource currencyEdit}"/>
+                    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource rightCheckBox}">
+                        <Setter Property="Width" Value="256"/>
+                    </Style>
+                </StackPanel.Resources>
+                <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług na terytorium kraju, zwolnione od podatku">
+                    <Label Content="Kwota netto zw."/>
+                    <xctk:MaskedTextBox Text="{Binding K_10}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług poza terytorium kraju">
+                    <Label Content="Kwota netto eksport"/>
+                    <xctk:MaskedTextBox Text="{Binding K_11}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - w tym świadczenie usług, o których mowa w art. 100 ust. 1 pkt 4 ustawy">
+                    <Label Content="Kwota netto art. 100 ust. 1 pkt 4"/>
+                    <xctk:MaskedTextBox Text="{Binding K_12}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 0%">
+                    <Label Content="Kwota netto 0%"/>
+                    <xctk:MaskedTextBox Text="{Binding K_13}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - w tym dostawa towarów, o której mowa w art. 129 ustawy">
+                    <Label Content="Kwota netto art. 129" />
+                    <xctk:MaskedTextBox Text="{Binding K_14}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 5%">
+                    <Label Content="Kwota netto 5%" />
+                    <xctk:MaskedTextBox Text="{Binding K_15}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota podatku należnego - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 5%">
+                    <Label Content="Kwota VAT 5%" />
+                    <xctk:MaskedTextBox Text="{Binding K_16}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 7% albo 8%">
+                    <Label Content="Kwota netto 7 lub 8%" />
+                    <xctk:MaskedTextBox Text="{Binding K_17}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota podatku należnego - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 7% albo 8%">
+                    <Label Content="Kwota VAT 7 lub 8%" />
+                    <xctk:MaskedTextBox Text="{Binding K_18}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 22% albo 23%">
+                    <Label Content="Kwota netto 22 lub 23%" />
+                    <xctk:MaskedTextBox Text="{Binding K_19}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota podatku należnego - Dostawa towarów oraz świadczenie usług na terytorium kraju, opodatkowane stawką 22% albo 23%">
+                    <Label Content="Kwota VAT 22 lub 23%" />
+                    <xctk:MaskedTextBox Text="{Binding K_20}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Wewnątrzwspólnotowa dostawa towarów">
+                    <Label Content="Kwota netto - dostawa UE" />
+                    <xctk:MaskedTextBox Text="{Binding K_21}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Eksport towarów">
+                    <Label Content="Kwota netto - Eksport" />
+                    <xctk:MaskedTextBox Text="{Binding K_22}" />
+                </DockPanel>
+                <DockPanel ToolTip="Kwota netto - Wewnątrzwspólnotowe nabycie towarów">
+                    <Label Content="Kwota netto - nabycie UE" />
+                    <xctk:MaskedTextBox Text="{Binding K_23}"/>
+                </DockPanel>
+                <DockPanel ToolTip="Kwota podatku należnego - Wewnątrzwspólnotowe nabycie towarów">
+                    <Label Content="Kwota VAT - nabycie UE" />
+                    <xctk:MaskedTextBox Text="{Binding K_24}"/>
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Width="3" Background="Gray" />
+        <StackPanel Grid.Column="2" Margin="2">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Label}" >
+                    <Setter Property="Width" Value="260"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+                <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource currencyEdit}"/>
+                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource rightCheckBox}">
+                    <Setter Property="Width" Value="256"/>
+                </Style>
+            </StackPanel.Resources>
+            <DockPanel ToolTip="Kwota netto - Import towarów podlegający rozliczeniu zgodnie z art. 33a ustawy">
+                <Label Content="Kwota netto - import art. 33a" />
+                <xctk:MaskedTextBox Text="{Binding K_25}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego - Import towarów podlegający rozliczeniu zgodnie z art. 33a ustawy">
+                <Label Content="Kwota VAT - import art. 33a" />
+                <xctk:MaskedTextBox Text="{Binding K_26}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota netto - Import usług z wyłączeniem usług nabywanych od podatników podatku od wartości dodanej, do których stosuje się art. 28b ustawy">
+                <Label Content="Kwota netto - import z wył. art. 28b" />
+                <xctk:MaskedTextBox Text="{Binding K_27}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego - Import usług z wyłączeniem usług nabywanych od podatników podatku od wartości dodanej, do których stosuje się art. 28b ustawy">
+                <Label Content="Kwota VAT - import z wył. art. 28b" />
+                <xctk:MaskedTextBox Text="{Binding K_28}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota netto - Import usług nabywanych od podatników podatku od wartości dodanej, do których stosuje się art. 28b ustawy">
+                <Label Content="Kwota netto - import art. 28b" />
+                <xctk:MaskedTextBox Text="{Binding K_29}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego - Import usług nabywanych od podatników podatku od wartości dodanej, do których stosuje się art. 28b ustawy">
+                <Label Content="Kwota VAT - import art. 28b" />
+                <xctk:MaskedTextBox Text="{Binding K_30}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 7 lub 8 ustawy (wypełnia dostawca)">
+                <Label Content="Kwota netto art. 17 u. 1 p. 7 i 8 (dostawca)" />
+                <xctk:MaskedTextBox Text="{Binding K_31}" />
+            </DockPanel>
+            <DockPanel ToolTip="Kwota netto - Dostawa towarów, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 5 ustawy (wypełnia nabywca)">
+                <Label Content="Kwota netto art. 17 ust. 1 pkt 5 (nabywca)" />
+                <xctk:MaskedTextBox Text="{Binding K_32}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego - Dostawa towarów, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 5 ustawy (wypełnia nabywca)">
+                <Label Content="Kwota VAT art. 17 ust. 1 pkt 5 (nabywca)" />
+                <xctk:MaskedTextBox Text="{Binding K_33}"/>
+            </DockPanel>
+            <DockPanel ToolTip="Kwota netto - Dostawa towarów oraz świadczenie usług, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 7 lub 8 ustawy (wypełnia nabywca)">
+                <Label Content="Kwota netto art. 17 u. 1 p. 7 i 8 (nabywca)" />
+                <xctk:MaskedTextBox Text="{Binding K_34}" />
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego - Dostawa towarów oraz świadczenie usług, dla których podatnikiem jest nabywca zgodnie z art. 17 ust. 1 pkt 7 lub 8 ustawy (wypełnia nabywca)">
+                <Label Content="Kwota VAT art. 17 u. 1 p. 7 i 8 (nabywca)" />
+                <xctk:MaskedTextBox Text="{Binding K_35}" />
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego od towarów i usług objętych spisem z natury, o którym mowa w art. 14 ust. 5 ustawy">
+                <Label Content="Kwota VAT inwentaryzacji art. 14 ust. 5" />
+                <xctk:MaskedTextBox Text="{Binding K_36}" />
+            </DockPanel>
+            <DockPanel ToolTip="Zwrot odliczonej lub zwróconej kwoty wydatkowanej na zakup kas rejestrujących, o którym mowa w art. 111 ust. 6 ustawy">
+                <Label Content="Zwrot odl./zwr. kwoty na zakup kas, art. 111 ust. 6" />
+                <xctk:MaskedTextBox Text="{Binding K_37}" />
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku należnego od wewnątrzwspólnotowego nabycia środków transportu, wykazanego w elemencie K_24, podlegająca wpłacie w terminie, o którym mowa w art. 103 ust. 3, w związku z ust. 4 ustawy">
+                <Label Content="Kwota VAT od nabycia UE środka transportu"/>
+                <xctk:MaskedTextBox Text="{Binding K_38}" />
+            </DockPanel>
+            <DockPanel ToolTip="Kwota podatku od wewnątrzwspólnotowego nabycia paliw silnikowych, podlegająca wpłacie w terminach,
+o których mowa w art. 103 ust. 5a i 5b ustawy">
+                <Label Content="Kwota VAT od nabycia UE paliw"/>
+                <xctk:MaskedTextBox Text="{Binding K_39}" />
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

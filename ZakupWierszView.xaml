@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="Puch.JPK.ZakupWierszView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Puch.JPK"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        d:DataContext="{x:Type local:JPKZakupWiersz}"
+        Height="220" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                <Setter Property="Width" Value="116"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="2, 0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                <Setter Property="FlowDirection" Value="RightToLeft"/>
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="FontStyle" Value="Italic"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel Margin="5">
+            <StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Width" Value="120"/>
+                    <Setter Property="Padding" Value="2"/>
+                </Style>
+                <Style TargetType="xctk:DateTimePicker" BasedOn="{StaticResource dateEdit}"/>
+            </StackPanel.Resources>
+            <TextBlock Text="Nagłówek"/>
+            <Separator/>
+            <DockPanel>
+                <Label Content="Lp"/>
+                <TextBox Text="{Binding LpZakupu}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Data zakupu"/>
+                <xctk:DateTimePicker Value="{Binding DataZakupu}" />
+            </DockPanel>
+            <DockPanel>
+                <CheckBox Content="Data wpływu" IsChecked="{Binding DataWplywuSpecified}" />
+                <xctk:DateTimePicker Value="{Binding DataWplywu}" IsEnabled="{Binding DataWplywuSpecified}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Dowód zakupu"/>
+                <TextBox Text="{Binding DowodZakupu}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="NIP dostawcy"/>
+                <TextBox Text="{Binding NrDostawcy}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Nazwa dostawcy"/>
+                <TextBox Text="{Binding NazwaDostawcy}" MaxLength="256"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Adres dostawcy"/>
+                <TextBox Text="{Binding AdresDostawcy}" MaxLength="256"/>
+            </DockPanel>
+        </StackPanel>
+        <GridSplitter HorizontalAlignment="Right" Width="3" Background="Gray" />
+        <StackPanel Grid.Column="1" Margin="5">
+            <TextBlock Text="Kwoty podatku"/>
+            <Separator/>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Label}" >
+                        <Setter Property="Width" Value="200"/>
+                        <Setter Property="Padding" Value="2"/>
+                    </Style>
+                    <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource currencyEdit}"/>
+                </StackPanel.Resources>
+                <DockPanel>
+                    <Label Content="Kwota netto nabycia Ś.T." ToolTip="Kwota netto - Nabycie towarów i usług zaliczanych u podatnika do środków trwałych"/>
+                    <xctk:MaskedTextBox Text="{Binding K_43}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Kwota podatku nal. Ś.T." ToolTip="Kwota podatku naliczonego - Nabycie towarów i usług zaliczanych u podatnika do środków trwałych"/>
+                    <xctk:MaskedTextBox Text="{Binding K_44}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Kwota netto nabycia pozostałe" ToolTip="Kwota netto - Nabycie towarów i usług pozostałych"/>
+                    <xctk:MaskedTextBox Text="{Binding K_45}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Kwota podatku nal. pozostałe" ToolTip="Kwota podatku naliczonego - Nabycie towarów i usług pozostałych"/>
+                    <xctk:MaskedTextBox Text="{Binding K_46}"/>
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Korekta podatku nal. Ś.T." ToolTip="Korekta podatku naliczonego od nabycia środków trwałych" />
+                    <xctk:MaskedTextBox Text="{Binding K_47}" />
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Korekta podatku nal. pozostałe" ToolTip="Korekta podatku naliczonego od pozostałych nabyć" />
+                    <xctk:MaskedTextBox Text="{Binding K_48}" />
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Korekta podatku n. art. 89b ust. 1" ToolTip="Korekta podatku naliczonego, o której mowa w art. 89b ust. 1 ustawy" />
+                    <xctk:MaskedTextBox Text="{Binding K_49}" />
+                </DockPanel>
+                <DockPanel>
+                    <Label Content="Korekta podatku n. art. 89b ust. 4" ToolTip="Korekta podatku naliczonego, o której mowa w art. 89b ust. 4 ustawy" />
+                    <xctk:MaskedTextBox Text="{Binding K_50}" />
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

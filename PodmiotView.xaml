@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Puch.JPK.PodmiotView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:Puch.JPK"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type local:JPKPodmiot1}"
+             d:DesignHeight="400" d:DesignWidth="300"
+             >
+    <Grid>
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Width" Value="100"/>
+                </Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Margin" Value="3"/>
+                </Style>
+                <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                    <Setter Property="Margin" Value="3"/>
+                </Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="FontStyle" Value="Italic"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="Identyfikator"/>
+            <DockPanel>
+                <Label Content="NIP"/>
+                <TextBox Text="{Binding IdentyfikatorPodmiotu.NIP}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Pełna nazwa"/>
+                <TextBox Text="{Binding IdentyfikatorPodmiotu.PelnaNazwa}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Regon"/>
+                <TextBox Text="{Binding IdentyfikatorPodmiotu.REGON}"/>
+            </DockPanel>
+            <Separator/>
+            <TextBlock Text="Adres"/>
+            <DockPanel>
+                <Label Content="Kraj"/>
+                <ComboBox SelectedValue="{Binding AdresPodmiotu.KodKraju}" SelectedValuePath="Kod" ItemsSource="{Binding Kraje}" DisplayMemberPath="Nazwa"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Województwo"/>
+                <TextBox Text="{Binding AdresPodmiotu.Wojewodztwo}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Powiat"/>
+                <TextBox Text="{Binding AdresPodmiotu.Powiat}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Gmina"/>
+                <TextBox Text="{Binding AdresPodmiotu.Gmina}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Ulica"/>
+                <TextBox Text="{Binding AdresPodmiotu.Ulica}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Nr domu/lokalu"/>
+                <UniformGrid Rows="1" Columns="2">
+                    <TextBox Text="{Binding AdresPodmiotu.NrDomu}"/>
+                    <TextBox Text="{Binding AdresPodmiotu.NrLokalu}"/>
+                </UniformGrid>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Miejscowość"/>
+                <TextBox Text="{Binding AdresPodmiotu.Miejscowosc}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Poczta"/>
+                <xctk:MaskedTextBox Margin="3" Mask="00-000" Text="{Binding AdresPodmiotu.KodPocztowy}"/>
+                <TextBox Text="{Binding AdresPodmiotu.Poczta}"/>
+            </DockPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Margin" Value="3"/>
+                        <Setter Property="Width" Value="60"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="OK" Command="{Binding CommandOK}"/>
+                <Button Content="Anuluj" Command="{Binding CommandCancel}"/>
+            </StackPanel>
+
+        </StackPanel>  
+    </Grid>
+</UserControl>

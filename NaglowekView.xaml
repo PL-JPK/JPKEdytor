@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Puch.JPK.NaglowekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:local="clr-namespace:Puch.JPK"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Type local:TNaglowek}"
+             d:DesignHeight="400" d:DesignWidth="600"
+             >
+    <Grid>
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Width" Value="120"/>
+                </Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="Margin" Value="3"/>
+                </Style>
+                <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                    <Setter Property="Margin" Value="3"/>
+                </Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="FontStyle" Value="Italic"/>
+                </Style>
+                <Style TargetType="xctk:DateTimePicker" BasedOn="{StaticResource dateEdit}"/>
+            </StackPanel.Resources>
+            <Expander Header="Kod formularza">
+                <StackPanel>
+                    <DockPanel>
+                        <Label Content="Kod systemowy"/>
+                        <TextBox Text="{Binding KodFormularza.kodSystemowy}"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Kod formularza"/>
+                        <TextBox Text="{Binding KodFormularza.Value}"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Wersja schemy"/>
+                        <TextBox Text="{Binding KodFormularza.wersjaSchemy}"/>
+                    </DockPanel>
+                </StackPanel>
+            </Expander>
+            <DockPanel>
+                <Label Content="Wariant formularza"/>
+                <TextBox Text="{Binding WariantFormularza}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Cel złożenia"/>
+                <ComboBox ItemsSource="{Binding CeleZlozenia}" SelectedItem="{Binding CelZlozenia}"  />
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Data wytworzenia"/>
+                <DatePicker Margin="3" Text="{Binding DataWytworzeniaJPK}" />
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Za okres"/>
+                <UniformGrid Columns="2" Rows="1">
+                    <xctk:DateTimePicker Value="{Binding DataOd}" />
+                    <xctk:DateTimePicker Value="{Binding DataDo}"/>
+                </UniformGrid>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Domyślny kod waluty"/>
+                <ComboBox SelectedItem="{Binding DomyslnyKodWaluty}" ItemsSource="{Binding KodyWalut}"/>
+            </DockPanel>
+            <DockPanel>
+                <Label Content="Urząd"/>
+                <ComboBox SelectedValue="{Binding KodUrzedu}" SelectedValuePath="Kod" ItemsSource="{Binding KodyUrzedow}" DisplayMemberPath="Nazwa"/>
+            </DockPanel>
+
+
+
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Margin" Value="3"/>
+                        <Setter Property="Width" Value="60"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="OK" Command="{Binding CommandOK}"/>
+                <Button Content="Anuluj" Command="{Binding CommandCancel}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

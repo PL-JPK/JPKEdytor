@@ -1,0 +1,151 @@
+﻿<Window x:Class="JPK.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:local="clr-namespace:Puch.JPK"
+        xmlns:common="clr-namespace:Puch.Common"
+        mc:Ignorable="d"
+        Title="Obsługa JPK-VAT" Height="800" Width="1024">
+    <Window.Resources>
+        <local:MainWindowViewmodel x:Key="mainWindowVm"/>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <ei:CallMethodAction  MethodName="WindowClosing" TargetObject="{StaticResource mainWindowVm}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <DockPanel DataContext="{StaticResource mainWindowVm}">
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Left">
+            <Menu.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Height" Value="20" />
+                </Style>
+            </Menu.Resources>
+            <MenuItem Header="Plik">
+                <MenuItem Header="Nowy JPK" Command="{Binding CommandNewJPK}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/document-new-4.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Otwórz" Command="{Binding CommandOpenJPK}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/document-open-5.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Zapisz" Command="{Binding CommandSaveJPK}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/document-save-5.png"/>
+                    </MenuItem.Icon>
+
+                </MenuItem>
+                <MenuItem Header="Zapisz jako..." Command="{Binding CommandSaveJPKAs}"/>
+                <Separator/>
+                <MenuItem Header="Domyślne dane podmiotu" Command="{Binding CommandDefaultPodmiotEdit}"/>
+                <Separator/>
+                <MenuItem Header="Zakończ program" Command="{Binding CommandCloseApp}"/>
+            </MenuItem>
+            <MenuItem Header="Pokaż" IsEnabled="{Binding ContainsJPK}">
+                <MenuItem Header="Dane podmiotu" Command="{Binding CommandShowPodmiot}"/>
+                <MenuItem Header="Nagłówek formularza" Command="{Binding CommandShowNaglowek}"/>
+                <MenuItem Header="Dane sprzedaży" Command="{Binding CommandSprzedaz}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/money-in.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Dane zakupów" Command="{Binding CommandZakup}">
+                    <MenuItem.Icon>
+                        <Image Source="Images/money-out.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Narzędzia">
+                <MenuItem Header="Pobierz dane z Excel-a" Command="{Binding CommandImportExcel}"/>
+            </MenuItem>
+        </Menu>
+        <ToolBar Height="40" DockPanel.Dock="Top" >
+            <Button Command="{Binding CommandNewJPK}" ToolTip="Utwórz nowy plik">
+                <common:AutoGreyableImage Source="Images/document-new-4.png"/>
+            </Button>
+            <Button Command="{Binding CommandOpenJPK}" ToolTip="Otwórz plik">
+                <common:AutoGreyableImage Source="Images/document-open-5.png"/>
+            </Button>
+            <Button Command="{Binding CommandSaveJPK}" ToolTip="Zapisz plik">
+                <common:AutoGreyableImage Source="Images/document-save-5.png"/>
+            </Button>
+            <Separator/>
+            <Button Command="{Binding CommandSprzedaz}" ToolTip="Sprzedaż">
+                <common:AutoGreyableImage Source="Images/money-in.png"/>
+            </Button>
+            <Button Command="{Binding CommandZakup}" ToolTip="Zakup">
+                <common:AutoGreyableImage Source="Images/money-out.png"/>
+            </Button>
+        </ToolBar>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="{Binding JPKTitle}"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem Visibility="{Binding ContainsJPK, Converter={StaticResource booleanToVisibilityConverter}}">
+                <TextBlock Text="{Binding IsModified,Converter={StaticResource boolToModifiedStringConverter}}"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <Grid Width="270" Height="150" Visibility="{Binding DisplaySummary, Converter={StaticResource booleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                        <Setter Property="FontSize" Value="15"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </Style>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                        <Setter Property="FontSize" Value="15"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Foreground" Value="Gray"/>
+                    </Style>                           
+                </Grid.Resources>                
+                <Label Content="Ilość pozycji zakupu" />
+                <TextBlock Grid.Column="1" Text="{Binding Jpk.ZakupCtrl.LiczbaWierszyZakupow}"/>
+                <Label Grid.Row="1" Content="Kwota VAT naliczonego" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Jpk.ZakupCtrl.PodatekNaliczony}"/>
+                <Label Grid.Row="2" Content="Ilość pozycji sprzedaży" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Jpk.SprzedazCtrl.LiczbaWierszySprzedazy}"/>
+                <Label Grid.Row="3" Content="Kwota VAT należnego" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Jpk.SprzedazCtrl.PodatekNalezny}"/>
+            </Grid>
+            <ContentControl Content="{Binding Content}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type local:PodmiotViewmodel}">
+                        <local:PodmiotView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:NaglowekViewmodel}">
+                        <local:NaglowekView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:ZakupViewmodel}">
+                        <local:ZakupView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:SprzedazViewmodel}">
+                        <local:SprzedazView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:ImportExcelViewmodel}">
+                        <local:ImportExcelView />
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+        </Grid>
+    </DockPanel>
+</Window>

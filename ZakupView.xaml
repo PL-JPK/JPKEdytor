@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Puch.JPK.ZakupView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Puch.JPK"
+        xmlns:common="clr-namespace:Puch.Common"
+        mc:Ignorable="d"
+        d:DataContext="{x:Type local:ZakupViewmodel}"
+        d:DesignHeight="600" d:DesignWidth="800">
+    <Grid>
+        <DockPanel>
+            <Grid DockPanel.Dock="Top" >
+                <ToolBar>
+                    <ToolBar.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="MinWidth" Value="22"/>
+                            <Setter Property="Height" Value="22"/>
+                            <Setter Property="Margin" Value="3"/>
+                        </Style>
+                    </ToolBar.Resources>
+                    <ToolBarPanel Orientation="Horizontal">
+                        <Button Command="{Binding CommandAddWiersz}" ToolTip="Dodaj wpis">
+                            <Image Source="Images\insert-table-row.png"/>
+                        </Button>
+                        <Button Command="{Binding CommandEditWiersz}" ToolTip="Popraw wpis">
+                            <Image Source="Images\edit-4.png"/>
+                        </Button>
+                        <Button Command="{Binding CommandDeleteWiersz}" ToolTip="Usuń wpis">
+                            <Image Source="Images\table-row-delete.png"/>
+                        </Button>
+                    </ToolBarPanel>
+                </ToolBar>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Margin" Value="3"/>
+                            <Setter Property="Width" Value="70"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Command="{Binding CommandOK}" Content="OK"/>
+                    <Button Command="{Binding CommandCancel}" Content="Anuluj"/>
+                </StackPanel>
+            </Grid>
+            <DataGrid ItemsSource="{Binding Zakupy}" SelectedItem="{Binding SelectedWiersz}" x:Name="grid"
+                      AutoGenerateColumns="False"  d:DataContext="{x:Type local:JPKZakupWiersz}" IsReadOnly="True">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="common:MouseDoubleClick.Command" Value="{Binding ElementName=grid, Path=DataContext.CommandEditWiersz}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding LpZakupu}" Header="Lp"/>
+                    <DataGridTextColumn Binding="{Binding DataZakupu, Converter={StaticResource dateConverter}}" Header="Data zakupu"/>
+                    <DataGridTextColumn Binding="{Binding DataWplywu, Converter={StaticResource dateConverter}}" Header="Data wpływu"/>
+                    <DataGridTextColumn Binding="{Binding DowodZakupu}" Header="Dowód zakupu"/>
+                    <DataGridTextColumn Binding="{Binding NrDostawcy}" Header="NIP dostawcy"/>
+                    <DataGridTextColumn Binding="{Binding NazwaDostawcy}" Header="Nazwa dostawcy"/>
+                    <DataGridTextColumn Binding="{Binding KwotaNetto}" Header="Netto"/>
+                    <DataGridTextColumn Binding="{Binding KwotaVat}" Header="VAT"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>
