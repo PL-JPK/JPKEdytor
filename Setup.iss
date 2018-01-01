@@ -34,7 +34,7 @@ Source: "C:\Projects\JPKEdytor\bin\Release\JPKEdytor.exe"; DestDir: "{app}"; Fla
 Source: "C:\Projects\JPKEdytor\bin\Release\Xceed.*"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Projects\JPKEdytor\bin\Release\System.*"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Projects\JPKEdytor\bin\Release\Microsoft.*"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Projects\JPKEdytor\bin\Release\Schema\*.xsd"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Projects\JPKEdytor\bin\Release\Schema\*.xsd"; DestDir: "{app}\Schema"; Flags: ignoreversion
 Source: "C:\Projects\JPKEdytor\LICENSE-PL.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
