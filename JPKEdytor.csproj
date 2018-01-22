@@ -136,10 +136,10 @@
     <Compile Include="PodmiotView.xaml.cs">
       <DependentUpon>PodmiotView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Schema\Schemat_JPK_VAT%282%29_v1-0.designer.cs" />
     <Compile Include="Common\UICommand.cs" />
     <Compile Include="Common\UIServices.cs" />
     <Compile Include="Common\ViewmodelBase.cs" />
+    <Compile Include="Schema\Schemat_JPK_VAT%283%29_v1-1.designer.cs" />
     <Compile Include="SprzedazViewmodel.cs" />
     <Compile Include="SprzedazWierszView.xaml.cs">
       <DependentUpon>SprzedazWierszView.xaml</DependentUpon>
@@ -227,24 +227,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Schema\ElementarneTypyDanych_v4-0E.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schema\KodyCechKrajow_v3-0E.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schema\KodyKrajow_v4-1E.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Schema\KodyUrzedowSkarbowych_v4-0E.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Schema\Schemat_JPK_VAT%282%29_v1-0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Schema\StrukturyDanych_v4-0E.xsd">
+    <None Include="Schema\Schemat_JPK_VAT%283%29_v1-1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
