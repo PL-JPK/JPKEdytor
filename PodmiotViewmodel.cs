@@ -35,13 +35,6 @@ namespace Puch.JPK
         public event EventHandler OnOk;
         public event EventHandler OnCancel;
 
-        public IEnumerable<DictionaryElement> Kraje
-        {
-            get
-            {
-                return XsdCodeReader.ReadDictionary(@"Schema\KodyKrajow_v4-1E.xsd");
-            }
-        }
         protected override bool SetField<T>(ref T field, T value, string propertyName)
         {
             InvalidateRequerySuggested();

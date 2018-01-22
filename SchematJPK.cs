@@ -11,7 +11,7 @@ using PropertyChanged;
 namespace Puch.JPK
 {
     [ImplementPropertyChanged]
-    [XmlRoot(Namespace = "http://jpk.mf.gov.pl/wzor/2016/10/26/10261/")]
+    [XmlRoot(Namespace = "http://jpk.mf.gov.pl/wzor/2017/11/13/1113/")]
     public partial class JPK
     {
         internal const string etd = "http://crd.gov.pl/xml/schematy/dziedzinowe/mf/2016/01/25/eD/DefinicjeTypy/";
@@ -31,13 +31,12 @@ namespace Puch.JPK
         public static JPK New()
         {
             JPK jpk = new JPK();
-            jpk.Naglowek.WariantFormularza = 2;
-            jpk.Naglowek.CelZlozenia = 1; // 1 - nowa deklaracja, 2 - korekta
+            jpk.Naglowek.WariantFormularza = 3;
+            jpk.Naglowek.CelZlozenia = 0; // 1 - nowa deklaracja, 2 - korekta
             DateTime now = DateTime.UtcNow;
             jpk.Naglowek.DataWytworzeniaJPK = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Kind);
             jpk.Naglowek.DataDo = DateTimeUtils.LastDayOfPreviousMonth;
             jpk.Naglowek.DataOd = DateTimeUtils.FirstDayOfPreviousMonth;
-            jpk.Naglowek.DomyslnyKodWaluty = currCode_Type.PLN;
             return jpk;
         }
 
@@ -59,10 +58,6 @@ namespace Puch.JPK
         }
 
     }
-    [XmlRoot(Namespace = JPK.etd)]
-    public partial class TIdentyfikatorOsobyNiefizycznej
-    {
-    }
 
     [ImplementPropertyChanged]
     public partial class JPKPodmiot1
@@ -71,25 +66,9 @@ namespace Puch.JPK
         {
             return new JPKPodmiot1()
             {
-                IdentyfikatorPodmiotu = new TIdentyfikatorOsobyNiefizycznej
-                {
-                    NIP = this.IdentyfikatorPodmiotu.NIP,
-                    REGON = this.IdentyfikatorPodmiotu.REGON,
-                    PelnaNazwa = this.IdentyfikatorPodmiotu.PelnaNazwa
-                },
-                AdresPodmiotu = new TAdresJPK
-                {
-                    Gmina = this.AdresPodmiotu.Gmina,
-                    KodKraju = this.AdresPodmiotu.KodKraju,
-                    KodPocztowy = this.AdresPodmiotu.KodPocztowy,
-                    Miejscowosc = this.AdresPodmiotu.Miejscowosc,
-                    NrDomu = this.AdresPodmiotu.NrDomu,
-                    NrLokalu = this.AdresPodmiotu.NrLokalu,
-                    Poczta = this.AdresPodmiotu.Poczta,
-                    Powiat = this.AdresPodmiotu.Powiat,
-                    Ulica = this.AdresPodmiotu.Ulica,
-                    Wojewodztwo = this.AdresPodmiotu.Wojewodztwo
-                }
+                PelnaNazwa = this.PelnaNazwa,
+                NIP = this.NIP,
+                Email = this.Email
             };
         }
     }
@@ -97,6 +76,14 @@ namespace Puch.JPK
     [ImplementPropertyChanged]
     public partial class JPKZakupWiersz
     {
+        public JPKZakupWiersz()
+        {
+            this.typ = "G";
+        }
+
+        [XmlAttribute]
+        public string typ { get; set; }
+
         public JPKZakupWiersz Clone()
         {
             var dest = new JPKZakupWiersz();
@@ -117,14 +104,5 @@ namespace Puch.JPK
             return dest;
         }
     }
-
-     public partial class TAdresJPK
-    {
-        public override string ToString()
-        {
-            return $"{KodPocztowy} {Miejscowosc}, {Ulica} {NrDomu}";
-        }
-    }
-
 
 }

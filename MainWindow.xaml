@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Puch.JPK"
         xmlns:common="clr-namespace:Puch.Common"
         mc:Ignorable="d"
-        Title="Obsługa JPK-VAT" Height="800" Width="1024">
+        Title="Obsługa JPK-VAT (3)" Height="800" Width="1024">
     <Window.Resources>
         <local:MainWindowViewmodel x:Key="mainWindowVm"/>
     </Window.Resources>

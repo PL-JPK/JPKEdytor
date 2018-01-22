@@ -18,9 +18,8 @@ namespace Puch.JPK
 
         private void _wstawDaneWlasne(object obj)
         {
-            SetProperty(nameof(JPKSprzedazWiersz.NrKontrahenta), _daneWlasne.IdentyfikatorPodmiotu.NIP);
-            SetProperty(nameof(JPKSprzedazWiersz.NazwaKontrahenta), _daneWlasne.IdentyfikatorPodmiotu.PelnaNazwa);
-            SetProperty(nameof(JPKSprzedazWiersz.AdresKontrahenta), _daneWlasne.AdresPodmiotu.ToString());
+            SetProperty(nameof(JPKSprzedazWiersz.NrKontrahenta), _daneWlasne.NIP);
+            SetProperty(nameof(JPKSprzedazWiersz.NazwaKontrahenta), _daneWlasne.PelnaNazwa);
         }
 
         public ICommand CommandWstawDaneWlasne { get; private set; }

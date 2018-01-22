@@ -6,7 +6,7 @@
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:Puch.JPK"
              mc:Ignorable="d" 
-             d:DataContext="{x:Type local:TNaglowek}"
+             d:DataContext="{d:DesignInstance local:TNaglowek}"
              d:DesignHeight="400" d:DesignWidth="600"
              >
     <Grid>
@@ -30,29 +30,29 @@
                 <StackPanel>
                     <DockPanel>
                         <Label Content="Kod systemowy"/>
-                        <TextBox Text="{Binding KodFormularza.kodSystemowy}"/>
+                        <TextBox Text="{Binding KodFormularza.kodSystemowy}" IsReadOnly="True"/>
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Kod formularza"/>
-                        <TextBox Text="{Binding KodFormularza.Value}"/>
+                        <TextBox Text="{Binding KodFormularza.Value}" IsReadOnly="True"/>
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Wersja schemy"/>
-                        <TextBox Text="{Binding KodFormularza.wersjaSchemy}"/>
+                        <TextBox Text="{Binding KodFormularza.wersjaSchemy}" IsReadOnly="True"/>
                     </DockPanel>
                 </StackPanel>
             </Expander>
             <DockPanel>
                 <Label Content="Wariant formularza"/>
-                <TextBox Text="{Binding WariantFormularza}"/>
+                <TextBox Text="{Binding WariantFormularza}" IsReadOnly="True"/>
             </DockPanel>
             <DockPanel>
                 <Label Content="Cel złożenia"/>
-                <ComboBox ItemsSource="{Binding CeleZlozenia}" SelectedItem="{Binding CelZlozenia}"  />
+                <xctk:ShortUpDown Value="{Binding CelZlozenia}" Margin="3" ToolTip="0 - deklaracja, 1, 2... - kolejne korekty" />
             </DockPanel>
             <DockPanel>
                 <Label Content="Data wytworzenia"/>
-                <DatePicker Margin="3" Text="{Binding DataWytworzeniaJPK}" />
+                <xctk:DateTimePicker Margin="3" Text="{Binding DataWytworzeniaJPK}" />
             </DockPanel>
             <DockPanel>
                 <Label Content="Za okres"/>
@@ -61,16 +61,6 @@
                     <xctk:DateTimePicker Value="{Binding DataDo}"/>
                 </UniformGrid>
             </DockPanel>
-            <DockPanel>
-                <Label Content="Domyślny kod waluty"/>
-                <ComboBox SelectedItem="{Binding DomyslnyKodWaluty}" ItemsSource="{Binding KodyWalut}"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Urząd"/>
-                <ComboBox SelectedValue="{Binding KodUrzedu}" SelectedValuePath="Kod" ItemsSource="{Binding KodyUrzedow}" DisplayMemberPath="Nazwa"/>
-            </DockPanel>
-
-
 
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <StackPanel.Resources>

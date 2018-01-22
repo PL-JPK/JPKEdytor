@@ -7,12 +7,6 @@ namespace Puch.JPK
 {
     public class NaglowekViewmodel: ViewmodelBase
     {
-        public enum TCelZlozenia: sbyte
-        {
-            Deklaracja = 1,
-            Korekta = 2
-        }
-
         public NaglowekViewmodel(TNaglowek naglowek) : base(naglowek)
         {
             CommandOK = new UICommand { ExecuteDelegate = _ok, CanExecuteDelegate = _canOK };
@@ -40,19 +34,6 @@ namespace Puch.JPK
 
         public event EventHandler OnOk;
         public event EventHandler OnCancel;
-
-        public IEnumerable<DictionaryElement> KodyUrzedow
-        {
-            get
-            {
-                return XsdCodeReader.ReadDictionary(@"Schema\KodyUrzedowSkarbowych_v4-0E.xsd");
-            }
-        }
-
-        public TCelZlozenia CelZlozenia { get { return GetProperty<TCelZlozenia>(nameof(TNaglowek.CelZlozenia)); } set { SetProperty(nameof(TNaglowek.CelZlozenia), value); } }
-
-        public Array CeleZlozenia { get { return Enum.GetValues(typeof(TCelZlozenia)); } }
-        public Array KodyWalut { get { return Enum.GetValues(typeof(currCode_Type)); } }
 
 
         protected override bool SetField<T>(ref T field, T value, string propertyName)

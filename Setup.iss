@@ -2,14 +2,14 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [Setup]
-AppId=Edytor JPK
-AppName=Edytor JPK
-AppVerName=Edytor JPK
+AppId=Edytor JPK3
+AppName=Edytor JPK (3)
+AppVerName=Edytor JPK (3)
 AppPublisher=JPK-Edytor
-DefaultDirName={localappdata}\JPK
+DefaultDirName={localappdata}\JPK 3
 DefaultGroupName=Edytor JPK
 OutputDir=C:\Projects\JPKEdytor
-OutputBaseFilename=Instalator-EdytorJPK
+OutputBaseFilename=Instalator-EdytorJPK3
 Compression=lzma
 SolidCompression=yes
 UsePreviousAppDir=yes

@@ -6,7 +6,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:Puch.JPK"
              mc:Ignorable="d" 
-             d:DataContext="{x:Type local:JPKPodmiot1}"
+             d:DataContext="{d:DesignInstance local:JPKPodmiot1}"
              d:DesignHeight="400" d:DesignWidth="300"
              >
     <Grid>
@@ -28,54 +28,18 @@
             <TextBlock Text="Identyfikator"/>
             <DockPanel>
                 <Label Content="NIP"/>
-                <TextBox Text="{Binding IdentyfikatorPodmiotu.NIP}"/>
+                <TextBox Text="{Binding NIP}"/>
             </DockPanel>
             <DockPanel>
                 <Label Content="Pełna nazwa"/>
-                <TextBox Text="{Binding IdentyfikatorPodmiotu.PelnaNazwa}"/>
+                <TextBox Text="{Binding PelnaNazwa}"/>
             </DockPanel>
             <DockPanel>
-                <Label Content="Regon"/>
-                <TextBox Text="{Binding IdentyfikatorPodmiotu.REGON}"/>
+                <Label Content="E-mail"/>
+                <TextBox Text="{Binding Email}" ToolTip="Nie jest wymagany"/>
             </DockPanel>
             <Separator/>
-            <TextBlock Text="Adres"/>
-            <DockPanel>
-                <Label Content="Kraj"/>
-                <ComboBox SelectedValue="{Binding AdresPodmiotu.KodKraju}" SelectedValuePath="Kod" ItemsSource="{Binding Kraje}" DisplayMemberPath="Nazwa"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Województwo"/>
-                <TextBox Text="{Binding AdresPodmiotu.Wojewodztwo}"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Powiat"/>
-                <TextBox Text="{Binding AdresPodmiotu.Powiat}"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Gmina"/>
-                <TextBox Text="{Binding AdresPodmiotu.Gmina}"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Ulica"/>
-                <TextBox Text="{Binding AdresPodmiotu.Ulica}"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Nr domu/lokalu"/>
-                <UniformGrid Rows="1" Columns="2">
-                    <TextBox Text="{Binding AdresPodmiotu.NrDomu}"/>
-                    <TextBox Text="{Binding AdresPodmiotu.NrLokalu}"/>
-                </UniformGrid>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Miejscowość"/>
-                <TextBox Text="{Binding AdresPodmiotu.Miejscowosc}"/>
-            </DockPanel>
-            <DockPanel>
-                <Label Content="Poczta"/>
-                <xctk:MaskedTextBox Margin="3" Mask="00-000" Text="{Binding AdresPodmiotu.KodPocztowy}"/>
-                <TextBox Text="{Binding AdresPodmiotu.Poczta}"/>
-            </DockPanel>
+
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
