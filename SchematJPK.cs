@@ -37,6 +37,7 @@ namespace Puch.JPK
             jpk.Naglowek.DataWytworzeniaJPK = new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Kind);
             jpk.Naglowek.DataDo = DateTimeUtils.LastDayOfPreviousMonth;
             jpk.Naglowek.DataOd = DateTimeUtils.FirstDayOfPreviousMonth;
+            jpk.Naglowek.NazwaSystemu = "JPKEdytor - Open Source";
             return jpk;
         }
 
@@ -76,14 +77,6 @@ namespace Puch.JPK
     [ImplementPropertyChanged]
     public partial class JPKZakupWiersz
     {
-        public JPKZakupWiersz()
-        {
-            this.typ = "G";
-        }
-
-        [XmlAttribute]
-        public string typ { get; set; }
-
         public JPKZakupWiersz Clone()
         {
             var dest = new JPKZakupWiersz();
