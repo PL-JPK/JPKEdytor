@@ -17,7 +17,7 @@ namespace Puch.JPK
         Sprzedaz
     }
 
-    public class ImportExcelViewmodel: ViewmodelBase
+    public class ImportExcelViewmodel : ViewmodelBase
     {
         private readonly ObservableCollection<object> _importRows = new ObservableCollection<object>();
         private readonly JPKPodmiot1 _daneWlasne;
@@ -143,25 +143,19 @@ namespace Puch.JPK
                     propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.DowodSprzedazy) : nameof(JPKZakupWiersz.DowodZakupu);
                     propertyValue = strVal;
                     break;
+                case "data otrzym.":
                 case "data otrzymania":
                     propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.DataSprzedazy) : nameof(JPKZakupWiersz.DataWplywu);
                     DateTime dataO;
                     if (DateTime.TryParse(strVal, out dataO))
                         propertyValue = dataO;
                     break;
+                case "data wyst.":
                 case "data wystawienia":
                     propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.DataWystawienia) : nameof(JPKZakupWiersz.DataZakupu);
                     DateTime dataW;
                     if (DateTime.TryParse(strVal, out dataW))
                         propertyValue = dataW;
-                    break;
-                case "nazwa":
-                    propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.NazwaKontrahenta) : nameof(JPKZakupWiersz.NazwaDostawcy);
-                    propertyValue = strVal;
-                    break;
-                case "adres":
-                    propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.AdresKontrahenta) : nameof(JPKZakupWiersz.AdresDostawcy);
-                    propertyValue = strVal;
                     break;
                 case "vat":
                     if (_importType == TImportType.Zakup)
@@ -174,7 +168,21 @@ namespace Puch.JPK
             if (propertyValue != null && !string.IsNullOrWhiteSpace(propertyName))
                 rowType.GetProperty(propertyName)?.SetValue(row, propertyValue, null);
 
-            if (columnTitle?.StartsWith("netto") == true || columnTitle?.StartsWith("kwota netto") == true)
+            if (columnTitle?.StartsWith("nazwa i adres") == true)
+            {
+                string[] nazwaIAdres = strVal.Split(new char[] { ',' }, 2);
+                if (nazwaIAdres.Length > 0)
+                {
+                    propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.NazwaKontrahenta) : nameof(JPKZakupWiersz.NazwaDostawcy);
+                    rowType.GetProperty(propertyName)?.SetValue(row, nazwaIAdres[0].Trim(), null);
+                }
+                if (nazwaIAdres.Length == 2)
+                {
+                    propertyName = ImportType == TImportType.Sprzedaz ? nameof(JPKSprzedazWiersz.AdresKontrahenta) : nameof(JPKZakupWiersz.AdresDostawcy);
+                    rowType.GetProperty(propertyName)?.SetValue(row, nazwaIAdres[1].Trim(), null);
+                }
+            }
+            if (columnTitle?.StartsWith("kwota netto") == true)
             {
                 if (ImportType == TImportType.Zakup)
                     ((JPKZakupWiersz)row).K_45 = Convert.ToDecimal(range.Cells[rowIndex, columnIndex].Value2) + ((JPKZakupWiersz)row).K_45;
@@ -208,9 +216,7 @@ namespace Puch.JPK
                     }
                 }
             }
-
-            if (ImportType == TImportType.Sprzedaz && 
-                (columnTitle?.StartsWith("vat") == true || columnTitle?.StartsWith("kwota vat") == true))
+            if (ImportType == TImportType.Sprzedaz && columnTitle?.StartsWith("vat") == true)
             {
                 int stawka;
                 decimal kwota = Convert.ToDecimal(range.Cells[rowIndex, columnIndex].Value2);
